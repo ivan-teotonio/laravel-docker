@@ -71,13 +71,17 @@ MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
 Suba os containers do projeto
 ```sh
-docker-compose up -d
+docker compose up -d
+
+docker compose down
 ```
 
 
 Acesse o container app
 ```sh
-docker-compose exec app bash
+docker compose exec -it nome_container bash
+docker compose exec -it nome_que_fica_abaixo_de_service bash
+
 ```
 
 
