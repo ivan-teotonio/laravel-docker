@@ -2,31 +2,32 @@
 
 @section('content')
 
-<div
-class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-<h1 class="h2">Produtos</h1>
-</div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Produtos</h1>
+    </div>
 
-<div>
-    <form action="{{ route('produtos.index') }}" method="get">
-        @csrf
-        <input type="text" name="pesquisar" placeholder="Pesquisar">
-        <button type="submit">Pesquisar</button>
-        <a href="{{ route('produtos.index') }}" type="button" class="btn btn-success float-end">Incluir Produto</a>
-    </form>
+    <div>
+        <form action="{{ route('produtos.index') }}" method="get" class="d-inline">
+            @csrf
+            <input type="text" name="pesquisar" placeholder="Pesquisar">
+            <button type="submit">Pesquisar</button>
+        </form><a href="{{ route('produtos.index') }}" type="button" class="btn btn-success float-end">Incluir Produto</a>
 
-    
-                <div class="table-responsive small mt-4">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Valor</th>
-                                <th class="text-end">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($findProdutos as $produto)
+
+        <div class="table-responsive small mt-4">
+            @if ($findProdutos->isEmpty())
+                <p>Nenhum produto encontrado</p>
+            @else
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                            <th class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($findProdutos as $produto)
                             <tr>
                                 <td class="align-middle">{{ $produto->nome }}</td>
                                 <td class="align-middle">{{ 'R$ ' . number_format($produto->preco, 2, ',', '.') }}</td>
@@ -39,11 +40,12 @@ class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-cente
                                     </a>
                                 </td>
                             </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+        </div>
 
-</div>
+    </div>
 
 @endsection

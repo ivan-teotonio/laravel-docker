@@ -4,11 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produto;
+
 class ProdutosController extends Controller
 {
-    public function index()
+   private $produto;
+
+    public function __construct(Produto $produto)
     {
-        $findProdutos = Produto::all();
-        return view('pages.produtos.paginacao', compact('findProdutos'));
+        $this->produto = $produto;
+    }
+
+    public function index(Request $request)
+    {
+        $pesquisa = $request->pesquisar;
+        $findProdutos = $this->produto->getProdutosPesquisarIndex(search: $pesquisa ?? null);
+        return view('pages.produtos.paginacao', compact('findProdutos',));
+    }
+
+    public function delete(Request $request)
+    {
+    prei na aula 30
     }
 }
