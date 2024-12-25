@@ -29,6 +29,7 @@
       <label class="form-label">Valor</label>
       <input
         type="text"
+        id="preco"
         name="preco"
         class="form-control
         @error('preco')
