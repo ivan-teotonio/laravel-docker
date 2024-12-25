@@ -12,7 +12,7 @@
             @csrf
             <input type="text" name="pesquisar" placeholder="Pesquisar">
             <button>Pesquisar</button>
-            <a type="button" href="" class="btn btn-success float-end">Incluir Produto</a>
+            <a type="button" href="{{ route('produto.criarProduto') }}" class="btn btn-success float-end">Incluir Produto</a>
         </form>
 
 

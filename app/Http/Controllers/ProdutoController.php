@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produto;
+use App\Http\Requests\FormRequestProduto;
 class ProdutoController extends Controller
 {
     private $produto;
@@ -29,5 +30,20 @@ class ProdutoController extends Controller
         $buscarRegistro->delete();
         return response()->json(['success' => true]);
     }
+
+    public function criarProduto(FormRequestProduto $request){
+
+        if($request->method() == 'POST'){
+            $this->produto->create([
+                'nome' => $request->nome,
+                'preco' => $request->preco
+            ]);
+            return redirect()->route('produto.index');
+        }
+        echo 'caio aqui 2';
+        return view('pages.produtos.create');
+    }
+
+
 }
 
