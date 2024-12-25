@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en" data-bs-theme="auto">
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
 
@@ -12,6 +12,8 @@
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -86,20 +88,23 @@
     </main>
     </div>
     </div>
+    @yield('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <script src="{{ asset('js/color-modes.js') }}"></script>
 
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}">
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
-        integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous">
-    </script>
-    <script src="dashboard.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js">
+    </script> --}}
+    {{-- <script src="{{ asset('js/dashboard.js') }}"></script> --}}
 
     </script>
-    <script src="{{ asset('js/dashboard.js') }}"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+
+    <script src="{{ asset('js/projeto.js') }}"></script>
 </body>
 
 </html>
