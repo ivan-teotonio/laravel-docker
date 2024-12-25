@@ -6,9 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 class ProdutoController extends Controller
 {
-    public function index(){
+    private $produto;
 
-        $findProdutos = Produto::all();
+    public function __construct(Produto $produto){
+        $this->produto = $produto;
+    }
+
+    public function index(Request $request){
+
+        $pesquisar = $request->pesquisar;
+        $findProdutos = $this->produto->getProdutosPesquisarIndex(search: $pesquisar ?? '');
 
         return view('pages.produtos.paginacao', compact('findProdutos'));
 

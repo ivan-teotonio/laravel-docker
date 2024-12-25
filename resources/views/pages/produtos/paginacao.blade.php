@@ -8,7 +8,7 @@
     </div>
 
     <div>
-        <form action="" method="get">
+        <form action="{{ route('produto.index') }}" method="get">
             @csrf
             <input type="text" name="pesquisar" placeholder="Pesquisar">
             <button>Pesquisar</button>
@@ -17,30 +17,34 @@
 
 
         <div class="table-responsive small mt-4">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Preço</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($findProdutos as $produto)
+            @if($findProdutos->isEmpty())
+                <p>Nenhum produto encontrado</p>
+            @else
+                <table class="table table-striped table-sm">
+                    <thead>
                         <tr>
-                            <td>{{ $produto->id }}</td>
-                            <td>{{ $produto->nome }}</td>
-                            <td>{{ 'R$ ' . number_format($produto->preco, 2, ',', '.') }}</td>
-                            <td>
-                                <a href="" class="btn btn-light btn-sm">Editar</a>
-                                <a href="" class="btn btn-danger btn-sm">Excluir</a>
-                            </td>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Ações</th>
                         </tr>
-                    @endforeach
-                    </tr>
-                </tbody>
+                    </thead>
+                    <tbody>
+                        @foreach ($findProdutos as $produto)
+                            <tr>
+                                <td>{{ $produto->id }}</td>
+                                <td>{{ $produto->nome }}</td>
+                                <td>{{ 'R$ ' . number_format($produto->preco, 2, ',', '.') }}</td>
+                                <td>
+                                    <a href="" class="btn btn-light btn-sm">Editar</a>
+                                    <a href="" class="btn btn-danger btn-sm">Excluir</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tr>
+                    </tbody>
             </table>
+            @endif
         </div>
 
 
