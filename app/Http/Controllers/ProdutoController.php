@@ -41,6 +41,8 @@ class ProdutoController extends Controller
             $data = $request->all();
             $data['preco'] = $this->componentes->formatacaoMascaraDinheiroDecimal($data['preco']);
             $this->produto->create($data);
+
+            toastr()->success('Produto criado com sucesso', 'Sucesso');
             return redirect()->route('produto.index');
         }
         echo 'caio aqui 2';
