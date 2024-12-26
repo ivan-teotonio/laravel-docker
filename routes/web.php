@@ -19,7 +19,12 @@ Route::get('/', function () {
 
 Route::prefix('produto')->group(function(){
     Route::get('/', [ProdutoController::class, 'index'])->name('produto.index');
+    //criar produto
     Route::get('/criarProduto', [ProdutoController::class, 'criarProduto'])->name('produto.crearProduto');
     Route::post('/criarProduto', [ProdutoController::class, 'criarProduto'])->name('produto.criarProduto');
+    //atualizar produto
+    Route::get('/atualizarProduto/{id}', [ProdutoController::class, 'atualizarProduto'])->name('produto.atualizarProduto');
+    Route::put('/atualizarProduto/{id}', [ProdutoController::class, 'atualizarProduto'])->name('produto.atualizarProduto');
+    //delete produto
     Route::delete('/delete/{id}', [ProdutoController::class, 'delete'])->name('produto.delete');
 });

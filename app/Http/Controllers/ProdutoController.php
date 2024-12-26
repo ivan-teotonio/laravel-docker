@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Http\Requests\FormRequestProduto;
+use App\Models\Componentes;
+
 class ProdutoController extends Controller
 {
     private $produto;
+    private $componentes;
 
-    public function __construct(Produto $produto){
+    public function __construct(Produto $produto, Componentes $componentes){
         $this->produto = $produto;
+        $this->componentes = $componentes;
     }
 
     public function index(Request $request){
@@ -34,14 +38,26 @@ class ProdutoController extends Controller
     public function criarProduto(FormRequestProduto $request){
 
         if($request->method() == 'POST'){
-            $this->produto->create([
-                'nome' => $request->nome,
-                'preco' => $request->preco
-            ]);
+            $data = $request->all();
+            $data['preco'] = $this->componentes->formatacaoMascaraDinheiroDecimal($data['preco']);
+            $this->produto->create($data);
             return redirect()->route('produto.index');
         }
         echo 'caio aqui 2';
         return view('pages.produtos.create');
+    }
+
+    public function atualizarProduto(FormRequestProduto $request,$id){
+        if($request->method() == 'PUT'){
+            $data = $request->all();
+            $data['preco'] = $this->componentes->formatacaoMascaraDinheiroDecimal($data['preco']);
+
+            $buscarRegistro = Produto::find($id);
+            $buscarRegistro->update($data);
+            return redirect()->route('produto.index');
+        }
+        $findProduto = Produto::where('id','=',$id)->first();
+        return view('pages.produtos.atualiza',compact('findProduto'));
     }
 
 

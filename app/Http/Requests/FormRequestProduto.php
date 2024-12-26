@@ -16,10 +16,10 @@ class FormRequestProduto extends FormRequest
     public function rules(): array
     {
         $request = [];
-        if($this->method() == 'POST'){
+        if($this->method() == 'POST' || $this->method() == 'PUT'){
             $request = [
                 'nome' => 'required|string|max:255',
-                'preco' => 'required|numeric',
+                'preco' => 'required',
             ];
         }
         return $request;
@@ -30,7 +30,6 @@ class FormRequestProduto extends FormRequest
         return [
             'nome.required' => 'O campo nome é obrigatório.',
             'preco.required' => 'O campo preço é obrigatório.',
-            'preco.numeric' => 'O campo preço deve ser um número.',
         ];
     }
 }

@@ -2,10 +2,11 @@
 
 @section('content')
 
-<form class="row g-3" action="{{ route('produto.criarProduto') }}" method="post">
+<form class="row g-3" action="{{ route('produto.atualizarProduto',$findProduto->id) }}" method="post">
     @csrf
+    @method('PUT')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Criar novo Produto</h1>
+        <h1 class="h2">Editar Produto</h1>
         <div class="btn-toolbar mb-2 mb-md-0"></div>
     </div>
 
@@ -18,7 +19,7 @@
         @error('nome')
         is-invalid
         @enderror"
-        value="{{ old('nome') }}"
+        value="{{ isset($findProduto->nome) ? $findProduto->nome : old('nome') }}"
       >
       @if($errors->has('nome'))
         <div class="invalid-feedback">
@@ -35,7 +36,7 @@
         @error('preco')
         is-invalid
         @enderror"
-        value="{{ old('preco') }}"
+        value="{{ isset($findProduto->preco) ? $findProduto->preco : old('preco') }}"
       >
       @if($errors->has('preco'))
         <div class="invalid-feedback">
@@ -47,7 +48,7 @@
 
 
     <div class="col-12">
-      <button type="submit" class="btn btn-success">Cadstrar</button>
+      <button type="submit" class="btn btn-success">Atualizar</button>
     </div>
   </form>
 @endsection
