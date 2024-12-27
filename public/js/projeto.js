@@ -41,18 +41,14 @@ $("#cep").blur(function () {
         if (validacep.test(cep)) {
             $("#logradouro").val(" ");
             $("#bairro").val(" ");
-            $("#cidade").val(" ");
-            $("#uf").val(" ");
-            $("#ibge").val(" ");
+            $("#endereco").val(" ");
             $.getJSON(
                 "https://viacep.com.br/ws/" + cep + "/json/",
                 function (data) {
                     if (!("erro" in data)) {
-                        $("#logradouro").val(data.logradouro);
-                        $("#bairro").val(data.bairro);
-                        $("#cidade").val(data.localidade);
-                        $("#uf").val(data.uf);
-                        $("#ibge").val(data.ibge);
+                        $("#logradouro").val(data.logradouro.toUpperCase());
+                        $("#bairro").val(data.bairro.toUpperCase());
+                        $("#endereco").val(data.endereco.toUpperCase());
                     } else {
                         alert("CEP não encontrado");
                     }
