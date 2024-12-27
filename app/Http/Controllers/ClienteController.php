@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Componentes;
-
+use App\Http\Requests\FormRequestClientes;
 class ClienteController extends Controller
 {
     private $cliente;
@@ -16,7 +16,7 @@ class ClienteController extends Controller
         $this->componentes = $componentes;
     }
 
-    public function index(Request $request){
+    public function index(FormRequestClientes $request){
 
         $pesquisar = $request->pesquisar;
         $findCliente = $this->cliente->getClientesPesquisarIndex(search: $pesquisar ?? '');
@@ -25,7 +25,7 @@ class ClienteController extends Controller
 
     }
 
-    public function delete(Request $request)
+    public function delete(FormRequestClientes $request)
     {
         //dd($request->all());
         $id = $request->id;
@@ -34,19 +34,18 @@ class ClienteController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function criarCliente(Request $request){
+    public function criarCliente(FormRequestClientes $request){
 
         if($request->method() == 'POST'){
             $data = $request->all();
             $this->cliente->create($data);
-            dd($data);
             toastr()->success('Cliente criado com sucesso', 'Sucesso');
             return redirect()->route('clientes.index');
         }
         return view('pages.clientes.create');
     }
 
-        public function atualizarCliente(Request $request,$id){
+        public function atualizarCliente(FormRequestClientes $request,$id){
         if($request->method() == 'PUT'){
             $data = $request->all();
             $data['preco'] = $this->componentes->formatacaoMascaraDinheiroDecimal($data['preco']);

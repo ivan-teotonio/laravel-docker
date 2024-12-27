@@ -120,7 +120,7 @@
 
 
     <div class="col-12">
-      <button type="submit" class="btn btn-success">Cadstrar</button>
+      <button type="submit" class="btn btn-success">Cadastrar</button>
     </div>
   </form>
 @endsection
