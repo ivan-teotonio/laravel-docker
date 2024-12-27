@@ -48,8 +48,6 @@ class ClienteController extends Controller
         public function atualizarCliente(FormRequestClientes $request,$id){
         if($request->method() == 'PUT'){
             $data = $request->all();
-            $data['preco'] = $this->componentes->formatacaoMascaraDinheiroDecimal($data['preco']);
-
             $buscarRegistro = Cliente::find($id);
             $buscarRegistro->update($data);
             return redirect()->route('clientes.index');
