@@ -11,7 +11,7 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
-                        href="#">
+                        href="{{ route('dashboard.index') }}">
                         <svg class="bi">
                             <use xlink:href="#house-fill" />
                         </svg>
@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{ route('vendas.index') }}">
                         <svg class="bi">
                             <use xlink:href="#file-earmark" />
                         </svg>
@@ -40,6 +40,15 @@
                             <use xlink:href="#people" />
                         </svg>
                         Clientes
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{ route('usuario.index') }}">
+                        <svg class="bi">
+                            <use xlink:href="#people" />
+                        </svg>
+                        Usuários
                     </a>
                 </li>
             </ul>

@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\VendaController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsuarioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +17,12 @@ use App\Http\Controllers\ClienteController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+
+Route::prefix('dashboard')->group(function(){
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+
 });
+
 
 Route::prefix('produto')->group(function(){
     Route::get('/', [ProdutoController::class, 'index'])->name('produto.index');
@@ -41,3 +47,27 @@ Route::prefix('clientes')->group(function(){
     //delete produto
     Route::delete('/delete/{id}', [ClienteController::class, 'delete'])->name('clientes.delete');
 });
+
+Route::prefix('vendas')->group(function(){
+    Route::get('/', [VendaController::class, 'index'])->name('vendas.index');
+    //criar produto
+    Route::get('/criarVenda', [VendaController::class, 'criarVenda'])->name('vendas.crearVenda');
+    Route::post('/criarVenda', [VendaController::class, 'criarVenda'])->name('vendas.criarVenda');
+    //enviar email
+    Route::get('/enviarComprovanteEmail/{id}', [VendaController::class, 'enviarComprovanteEmail'])->name('vendas.enviarComprovanteEmail');
+});
+
+Route::prefix('usuario')->group(function(){
+    Route::get('/', [UsuarioController::class, 'index'])->name('usuario.index');
+
+    Route::get('/criarUsuario', [UsuarioController::class, 'criarUsuario'])->name('usuario.criarUsuario');
+    Route::post('/criarUsuario', [UsuarioController::class, 'criarUsuario'])->name('usuario.criarUsuario');
+    //atualizar produto
+    Route::get('/atualizarUsuario/{id}', [UsuarioController::class, 'atualizarUsuario'])->name('usuario.atualizarUsuario');
+    Route::put('/atualizarUsuario/{id}', [UsuarioController::class, 'atualizarUsuario'])->name('usuario.atualizarUsuario');
+    //delete produto
+    Route::delete('/delete/{id}', [UsuarioController::class, 'delete'])->name('usuario.delete');
+
+});
+
+
