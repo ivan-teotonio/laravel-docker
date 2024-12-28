@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\UsuarioFormRequest;
 
 class UsuarioController extends Controller
 {
@@ -33,19 +33,19 @@ class UsuarioController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function criarUsuario(Request $request){
+    public function criarUsuario(UsuarioFormRequest $request){
 
         if($request->method() == 'POST'){
+
             $data = $request->all();
             $this->user->create($data);
-
             toastr()->success('Usuario criado com sucesso', 'Sucesso');
             return redirect()->route('usuario.index');
         }
         return view('pages.usuario.create');
     }
 
-    public function atualizarUsuario(Request $request,$id){
+    public function atualizarUsuario(UsuarioFormRequest $request,$id){
         if($request->method() == 'PUT'){
             $data = $request->all();
             $data['password'] = Hash::make($data['password']);

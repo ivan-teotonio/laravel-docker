@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\Cliente;
 use App\Models\Venda;
-
+use App\Models\User;
 class DashboardController extends Controller
 {
     public function index()
@@ -14,9 +14,10 @@ class DashboardController extends Controller
         $totalDeProdutosCadastrados = $this->buscaTotalDeRegistros(Produto::class);
         $totalDeClientesCadastrados = $this->buscaTotalDeRegistros(Cliente::class);
         $totalDeVendasRealizadas = $this->buscaTotalDeRegistros(Venda::class);
+        $totalDeUsuariosCadastrados = $this->buscaTotalDeRegistros(User::class);
 
         return view('pages.dashboard.dashboard', compact('totalDeProdutosCadastrados',
-        'totalDeClientesCadastrados', 'totalDeVendasRealizadas'));
+        'totalDeClientesCadastrados', 'totalDeVendasRealizadas', 'totalDeUsuariosCadastrados'));
     }
 
     private function buscaTotalDeRegistros(string $modelClass)

@@ -2,11 +2,11 @@
 
 @section('content')
 
-<form class="row g-3" action="{{ route('produto.atualizarProduto',$findProduto->id) }}" method="post">
+<form class="row g-3" action="{{ route('usuario.atualizarUsuario',$findUsuario->id) }}" method="post">
     @csrf
     @method('PUT')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Editar Produto</h1>
+        <h1 class="h2">Editar Usuario</h1>
         <div class="btn-toolbar mb-2 mb-md-0"></div>
     </div>
 
@@ -14,36 +14,57 @@
       <label  class="form-label">Nome</label>
       <input
         type="text"
-        name="nome"
+        name="name"
         class="form-control
-        @error('nome')
+        @error('name')
         is-invalid
         @enderror"
-        value="{{ isset($findProduto->nome) ? $findProduto->nome : old('nome') }}"
+        value="{{ isset($findUsuario->name) ? $findUsuario->name : old('name') }}"
       >
-      @if($errors->has('nome'))
+      @if($errors->has('name'))
         <div class="invalid-feedback">
-          {{ $errors->first('nome') }}
+          {{ $errors->first('name') }}
         </div>
       @endif
     </div>
+
     <div class="col-12">
-      <label class="form-label">Valor</label>
+      <label class="form-label">Email</label>
       <input
-        id="preco"
-        name="preco"
+        id="email"
+        name="email"
         class="form-control
-        @error('preco')
+        @error('email')
         is-invalid
         @enderror"
-        value="{{ isset($findProduto->preco) ? $findProduto->preco : old('preco') }}"
+        value="{{ isset($findUsuario->email) ? $findUsuario->email : old('email') }}"
       >
-      @if($errors->has('preco'))
+      @if($errors->has('email'))
         <div class="invalid-feedback">
-          {{ $errors->first('preco') }}
+          {{ $errors->first('email') }}
         </div>
       @endif
     </div>
+
+
+    <div class="col-12">
+        <label class="form-label">Nova Senha</label>
+        <input
+          id="password"
+          name="password"
+          class="form-control
+          @error('password')
+          is-invalid
+          @enderror"
+        >
+        @if($errors->has('password'))
+          <div class="invalid-feedback">
+            {{ $errors->first('password') }}
+          </div>
+        @endif
+      </div>
+
+
 
 
 
